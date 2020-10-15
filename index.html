@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Welcome</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap" rel="stylesheet"> -->
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/one_page.css">
+
+  <!-- JS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="js/jquery.min.3.5.1.js"></script>
+  <script src="js/mustache.js" charset="utf-8"></script>
+  <script src="js/howler.js" charset="utf-8"></script>
+
+
+
+  <!-- JSON sources
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="js/mis.js" charset="utf-8"></script>
+  <script src="js/mir.js" charset="utf-8"></script>
+
+
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+
+<body class="unmuted paused">
+
+  <div id="reload"></div>
+
+<!-- VIDEO BG -->
+  <div id="overlay"></div>
+  <video id="layer1" playsinline autoplay muted loop>
+    <source src="videos/test1.mp4" type="video/mp4" id='layer1'>
+  </video>
+
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+    <div id="loader" class="loading">
+      <div id="mount-jaysonwhelpley-GradientStrokeEminate"></div>
+      <script src="js/haiku.js" charset="utf-8"></script>
+      <script src="js/loader.js" charset="utf-8"></script>
+      <script type="text/javascript">
+        HaikuComponentEmbed_jaysonwhelpley_GradientStrokeEminat(
+          document.getElementById('mount-jaysonwhelpley-GradientStrokeEminate'),
+          {loop: true}
+        );
+      </script>
+    </div>
+
+    <div id="index" class="container hidden">
+      <div class="row">
+        <div class="center-view main">
+          <h4 id="title"><img src="images/logo-jfp.png" alt="Jesus Film Project"></h4>
+          <p><button class="main" id='missionaries_button'>Missionaries</button></p>
+          <p><button class="main" id='miracles_button'>Miracles</button></a></p>
+          <p>Touch one of the buttons to get started.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Miracles Section -->
+
+
+      <audio id="bed" loop>
+        <source src="audio/beds/bed1.mp3" type="audio/mpeg">
+      </audio>
+
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<script id="miracles-menu-template" type="text/template">
+  <div id="miracles" class="container menu miracles_section">
+    <div class="row">
+      <div class="center-view">
+        <h4 id="title">miracles</h4>
+        <ul id="miracle_list">
+        {{#miracles}}
+          <li>
+            <dl class="mir_link" id="{{slug}}_link">
+              <dt><img src="images/miracles/{{slug}}.png" alt="avatar" class="mir_image"></dt>
+              <dd class="meta">{{location}}</dd>
+              <dd class="name">{{title}}</dd>
+            </dl>
+          </li>
+        {{/miracles}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="missionary-menu-template" type="text/template">
+  <div id="missionaries" class="container hide menu missionaries_section">
+    <div class="row">
+      <div class="center-view">
+        <h4 id="title">missionaries</h4>
+        <ul id="missionary_list">
+          {{#missionaries}}
+            <li>
+              <dl id="{{slug}}_link" class="mis_link">
+                <dt><img src="images/missionaries/avatars/{{slug}}.jpg" alt="avatar" class="mis_image"></dt>
+                <dd class="meta">{{location}} - {{date}}</dd>
+                <dd class="name">{{name}}</dd>
+              </dl>
+            </li>
+          {{/missionaries}}
+        </ul>
+      </div>
+    </div>
+  </div>
+  </div>
+</script>
+
+<script id="misTemplate" type="text/template">
+{{#missionaries}}
+  <div id="{{slug}}" class="container detail detail_mis missionaries_section">
+    <div class="row">
+      <div class="center-view">
+        <div class="avatar">
+          <div class="detail-header"><img src="images/missionaries/avatars/{{slug}}.jpg" alt="avatar"></div>
+        </div>
+        <div class="detail-content header-content">
+          <h1 class="name">{{name}}</h1>
+          <p class="meta">{{location}} - {{date}}</p>
+        </div>
+        <div class="detail-content main-content">
+          {{#paragraphs}}
+            <p>{{.}}</p>
+          {{/paragraphs}}
+        </div>
+      </div>
+    </div>
+    <audio id="story" >
+      <source src="audio/stories/{{slug}}.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+  {{/missionaries}}
+
+</script>
+
+<script id="mirTemplate" type="text/template">
+{{#miracles}}
+  <div id="{{slug}}" class="container detail detail_mir miracles_section">
+    <div class="row">
+      <div class="center-view">
+        <div class="avatar">
+          <div class="detail-header"><img src="images/miracles/{{slug}}.png" alt="avatar" >
+          </div>
+        </div>
+        <div class="detail-content">
+          <h1 class="name">{{title}}</h1>
+          <p class="meta">{{location}}</p>
+          {{#paragraphs}}
+            <p>{{.}}</p>
+          {{/paragraphs}}
+        </div>
+      </div>
+    </div>
+    <audio id="story" >
+      <source src="audio/stories/{{slug}}.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+  {{/miracles}}
+
+</script>
+
+<script id="menuTemplate" type="text/template">
+  <nav class="floating-menu">
+    <a class="home_button">
+      <img src="images/icons/home.png" alt="button">
+      <span class="label">Home</span>
+    </a>
+    <a class="menu_button">
+      <img src="images/icons/back.png" alt="button">
+      <span class="label back_mis">Missionaries</span>
+      <span class="label back_mir">Miracles</span>
+    </a>
+    <div class="spacer"></div>
+   <a class="play_pause_button">
+       <span class="play_pause_todo play_it">
+         <img src="images/icons/play.png" alt="button">
+         <span class="label">
+           Play
+         </span>
+       </span>
+       <span class="play_pause_todo pause_it">
+         <img src="images/icons/pause.png" alt="button">
+         <span class="label">
+           Pause
+         </span>
+       </span>
+   </a>
+   <a class="restart_button">
+     <img src="images/icons/restart.png" alt="button">
+     <span class="label">Restart</span>
+   </a>
+    <a class="mute_button">
+        <span class="mute_status mute_off">
+          <img src="images/icons/mute-off.png" alt="button">
+          <span class="label">Mute: Off</span>
+        </span>
+        <span class="mute_status mute_on">
+          <img src="images/icons/mute-on.png" alt="button">
+          <span class="label">Mute: On</span>
+        </span>
+     </a>
+     <div class="spacer"></div>
+      <a class="next_button">
+        <img src="images/icons/next.png" alt="button">
+        <span class="label">Next</span>
+      </a>
+      <a class="previous_button">
+        <img src="images/icons/previous.png" alt="button">
+        <span class="label">Previous</span>
+      </a>
+  </nav>
+</script>
+
+
+<script src="js/tour.js" charset="utf-8"></script>
+
+</body>
+
+</html>
