@@ -6,7 +6,7 @@
   var muted = false
 
   audio_bed = new Howl({
-    src: ['/audio/beds/bed1.mp3']
+    src: ['audio/beds/bed1.mp3']
   });
 
   mis_container_ids = []
