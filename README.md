@@ -3,7 +3,7 @@ Audio story wall for the Jesus Film Project tour.
 
 Created in October 2020 by Jayson Whelpley and Drew Warkentin
 
-##Directory Structure
+## Directory Structure
 ```index.html      The only html file.
   /audio
     /bed            The musical audio bed lives here.
@@ -25,7 +25,7 @@ Created in October 2020 by Jayson Whelpley and Drew Warkentin
   /videos           Really just the background video.
 ```
 
-##HTML Page Structure:
+## HTML Page Structure:
 There's only one html file: index.html. Inside of that file:
 * CSS files: normalize.css, skeleton.css, one_page.css (these should be combined)
 * JS files:
@@ -35,7 +35,7 @@ There's only one html file: index.html. Inside of that file:
   * tour.js (at the bottom of the page, this is all of the custom JS)
 * JSON files that contain all Missionary and Miracle content. Mustache uses these to populate the page.
 
-##JSON Structures:
+## JSON Structures:
 ```miracles (mir.json)
   title:      string
   slug:       string (unique)
@@ -54,7 +54,7 @@ There's only one html file: index.html. Inside of that file:
 
 The order of the *active* content will be the displayed order.
 
-##Adding new content:
+## Adding new content:
 1. Add the content to the appropriate JSON file. Take note of the "slug."
 1. Add the representative avatar/icon/image to the proper image folder.
   * Miracle images should be *slug*.png
@@ -65,7 +65,7 @@ When the page is reloaded the new story should be available.
 
 
 
-###Notes
+### Notes
 The `body` tag has two classes that store the audio tracks' playing/muted status.
 
 `.reload` creates a small square at the bottom left of the screen that, when tapped 8 times, reloads the experience.
