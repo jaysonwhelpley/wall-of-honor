@@ -49,26 +49,28 @@
 
   <div id="reload"></div>
 
-<!-- VIDEO BG -->
+  <!-- Loading Animation -->
+
+  <div id="loader" class="loading">
+    <div id="mount-jaysonwhelpley-GradientStrokeEminate"></div>
+    <script src="js/haiku.js" charset="utf-8"></script>
+    <script src="js/loader.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      HaikuComponentEmbed_jaysonwhelpley_GradientStrokeEminat(
+        document.getElementById('mount-jaysonwhelpley-GradientStrokeEminate'),
+        {loop: true}
+      );
+    </script>
+  </div>
   <div id="overlay"></div>
+
+<!-- VIDEO BG -->
   <video id="layer1" playsinline autoplay muted loop>
     <source src="videos/test1.mp4" type="video/mp4" id='layer1'>
   </video>
 
-    <!-- Primary Page Layout
+    <!-- Index Page
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-    <div id="loader" class="loading">
-      <div id="mount-jaysonwhelpley-GradientStrokeEminate"></div>
-      <script src="js/haiku.js" charset="utf-8"></script>
-      <script src="js/loader.js" charset="utf-8"></script>
-      <script type="text/javascript">
-        HaikuComponentEmbed_jaysonwhelpley_GradientStrokeEminat(
-          document.getElementById('mount-jaysonwhelpley-GradientStrokeEminate'),
-          {loop: true}
-        );
-      </script>
-    </div>
 
     <div id="index" class="container hidden">
       <div class="row">
@@ -81,20 +83,10 @@
       </div>
     </div>
 
-    <!-- Miracles Section -->
 
+<!-- Section Menus -->
 
-      <audio id="bed" loop>
-        <source src="audio/beds/bed1.mp3" type="audio/mpeg">
-      </audio>
-
-
-    <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-
-    <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<!-- Miracles Menu -->
 
 <script id="miracles-menu-template" type="text/template">
   <div id="miracles" class="container menu miracles_section">
@@ -117,6 +109,8 @@
   </div>
 </script>
 
+<!-- Missionaries Menu -->
+
 <script id="missionary-menu-template" type="text/template">
   <div id="missionaries" class="container hide menu missionaries_section">
     <div class="row">
@@ -126,7 +120,7 @@
           {{#missionaries}}
             <li>
               <dl id="{{slug}}_link" class="mis_link">
-                <dt><img src="images/missionaries/avatars/{{slug}}.jpg" alt="avatar" class="mis_image"></dt>
+                <dt><img src="images/missionaries/{{slug}}.jpg" alt="avatar" class="mis_image"></dt>
                 <dd class="meta">{{location}} - {{date}}</dd>
                 <dd class="name">{{name}}</dd>
               </dl>
@@ -139,13 +133,17 @@
   </div>
 </script>
 
+<!-- Detail Page Templates -->
+
+<!-- Missionary Datail Page Template -->
+
 <script id="misTemplate" type="text/template">
 {{#missionaries}}
   <div id="{{slug}}" class="container detail detail_mis missionaries_section">
     <div class="row">
       <div class="center-view">
         <div class="avatar">
-          <div class="detail-header"><img src="images/missionaries/avatars/{{slug}}.jpg" alt="avatar"></div>
+          <div class="detail-header"><img src="images/missionaries/{{slug}}.jpg" alt="avatar"></div>
         </div>
         <div class="detail-content header-content">
           <h1 class="name">{{name}}</h1>
@@ -165,6 +163,8 @@
   {{/missionaries}}
 
 </script>
+
+<!-- Miracle Detail Page Template -->
 
 <script id="mirTemplate" type="text/template">
 {{#miracles}}
@@ -191,6 +191,10 @@
   {{/miracles}}
 
 </script>
+
+<!-- Side Menu Template
+    All buttons "exist" on every page, but are "turned on/off" by CSS & JS
+-->
 
 <script id="menuTemplate" type="text/template">
   <nav class="floating-menu">

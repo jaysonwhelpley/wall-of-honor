@@ -124,7 +124,7 @@ body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 400;
-  font-family: "Apercu", "Lato", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Apercu", "Lato", "Droid Sans", sans-serif;
   color: #fff;
   background-color: #222; }
 
@@ -318,7 +318,7 @@ body.detail .center-view {
 .header-content .meta {
   font-size: 1.155vh;
   letter-spacing: .15rem;
-  font-family: "Apercu", 'lato', sans-serif;
+  font-family: "Apercu", "Lato", "Droid Sans", sans-serif;
   font-weight: 100;
   margin-bottom: 1vh;
   border-bottom: 1px solid;
