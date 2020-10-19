@@ -27,12 +27,12 @@ Created in October 2020 by Jayson Whelpley and Drew Warkentin
 
 ## HTML Page Structure:
 There's only one html file: index.html. Inside of that file:
-* CSS files: normalize.css, skeleton.css, one_page.css (these should be combined)
+* CSS files: `normalize.css`, `skeleton.css`, `one_page.css` (these should be combined)
 * JS files:
-  * JQuery
-  * Mustache (this allows for page templating)
-  * Howler (audio controller)
-  * tour.js (at the bottom of the page, this is all of the custom JS)
+  * `JQuery`
+  * `Mustache` (this allows for page templating)
+  * `Howler` (audio controller)
+  * `tour.js` (at the bottom of the page, this is all of the custom JS)
 * JSON files that contain all Missionary and Miracle content. Mustache uses these to populate the page.
 
 ## JSON Structures:
@@ -57,8 +57,8 @@ The order of the *active* content will be the displayed order.
 ## Adding new content:
 1. Add the content to the appropriate JSON file. Take note of the "slug."
 1. Add the representative avatar/icon/image to the proper image folder.
-  * Miracle images should be *slug*.png
-  * Missionary images should be *slug*.jpg
+    * Miracle images should be *slug*.png
+    * Missionary images should be *slug*.jpg
 1. The story audio track should have 3 seconds of silence at the beginngin of the track and be named *slug*.mpg.
 
 When the page is reloaded the new story should be available.
