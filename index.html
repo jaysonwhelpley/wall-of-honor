@@ -34,8 +34,8 @@
 
   <!-- JSON sources
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="js/mis.js" charset="utf-8"></script>
-  <script src="js/mir.js" charset="utf-8"></script>
+  <!-- <script src="js/mis.js" charset="utf-8"></script> -->
+  <!-- <script src="js/mir.js" charset="utf-8"></script> -->
 
 
 
@@ -197,7 +197,7 @@
 -->
 
 <script id="menuTemplate" type="text/template">
-  <nav class="floating-menu">
+  <nav class="floating-menu left">
     <a class="home_button">
       <img src="images/icons/home.png" alt="button">
       <span class="label">Home</span>
@@ -208,6 +208,24 @@
       <span class="label back_mir">Miracles</span>
     </a>
     <div class="spacer"></div>
+    <div class="spacer"></div>
+     <a class="previous_button">
+       <img src="images/icons/previous.png" alt="button">
+       <span class="label">Previous</span>
+     </a>
+
+  </nav>
+  <nav class="floating-menu right">
+   <a class="mute_button">
+       <span class="mute_status mute_off">
+         <img src="images/icons/mute-off.png" alt="button">
+         <span class="label">Mute: Off</span>
+       </span>
+       <span class="mute_status mute_on">
+         <img src="images/icons/mute-on.png" alt="button">
+         <span class="label">Mute: On</span>
+       </span>
+    </a>
    <a class="play_pause_button">
        <span class="play_pause_todo play_it">
          <img src="images/icons/play.png" alt="button">
@@ -226,25 +244,11 @@
      <img src="images/icons/restart.png" alt="button">
      <span class="label">Restart</span>
    </a>
-    <a class="mute_button">
-        <span class="mute_status mute_off">
-          <img src="images/icons/mute-off.png" alt="button">
-          <span class="label">Mute: Off</span>
-        </span>
-        <span class="mute_status mute_on">
-          <img src="images/icons/mute-on.png" alt="button">
-          <span class="label">Mute: On</span>
-        </span>
-     </a>
-     <div class="spacer"></div>
-      <a class="next_button">
-        <img src="images/icons/next.png" alt="button">
-        <span class="label">Next</span>
-      </a>
-      <a class="previous_button">
-        <img src="images/icons/previous.png" alt="button">
-        <span class="label">Previous</span>
-      </a>
+   <div class="spacer"></div>
+   <a class="next_button">
+     <img src="images/icons/next.png" alt="button">
+     <span class="label">Next</span>
+   </a>
   </nav>
 </script>
 

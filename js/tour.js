@@ -30,6 +30,7 @@
 
     let template = $('#menuTemplate').html()
     let html = Mustache.render(template,data)
+    console.log(template);
     $('.container').not('#index').append(html)
 
     $(".menu .floating-menu .menu_button, .menu .floating-menu .next_button, .menu .floating-menu .back_button, .detail_mir:last .next_button, .detail_mir:first .back_button, .detail_mis:last .next_button, .detail_mis:first .back_button, .menu .floating-menu .play_pause_button, .menu .floating-menu .restart_button").addClass("inactive")
