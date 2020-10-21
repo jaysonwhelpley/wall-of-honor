@@ -53,7 +53,14 @@ video {
   z-index: 100;
   position: fixed;
   top: 40%;
+}
+
+.floating-menu.right {
   right: 5%;
+}
+
+.floating-menu.left {
+  left: 5%;
 }
 
 .floating-menu a {
@@ -68,18 +75,19 @@ video {
 .floating-menu img {
   width: 2vw;
   height: 2vw;
-  margin: 0.875vw;
+  margin: 0.875vw 0.25vw 0.875vw 0.875vw;
   display: inline;
   }
 
 .floating-menu .label {
   color: rgba(0, 0, 0, 0.8);
   position: relative;
-  top: -1em;
+  top: -0.9em;
+  font-size: .85vh
   }
 
 .floating-menu .inactive {
-  opacity: 0
+  opacity: 0.1
 }
 
 .floating-menu .spacer {
