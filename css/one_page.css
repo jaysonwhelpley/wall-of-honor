@@ -1,3 +1,14 @@
+@font-face {
+    font-family: Apercu;
+    src: url("fonts/ApercuRegular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Apercu;
+    font-weight: bold;
+    src: url("fonts/ApercuBold.otf") format("opentype");
+}
+
 .container, #loader {
   display: none
 }
@@ -119,9 +130,9 @@ video {
 }
 
 #loader {
-  width: 33vw;
-  height: 33vw;
-  margin: 33vh 33vw 33vh 33vw;
+  width: 400px;  /* SVG Animations are easier to work with as PX sizes. */
+  height: 400px;
+  margin: 33vh auto;
 }
 
 .hidden {

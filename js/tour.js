@@ -90,10 +90,10 @@
   $(document).ready(function() {
 
     // Trasnform Loader
-    svg_width = $('#loader #mount-jaysonwhelpley-GradientStrokeEminate').width()
-    screen_width = screen.availWidth
-    transform_scale = screen_width/svg_width
-    $('#loader #mount-jaysonwhelpley-GradientStrokeEminate').css('transform','scale(0.3').css('transform-origin','0% 0% 0px')
+    // svg_width = $('#loader #mount-jaysonwhelpley-GradientStrokeEminate').width()
+    // screen_width = screen.availWidth
+    // transform_scale = screen_width/svg_width
+    // $('#loader #mount-jaysonwhelpley-GradientStrokeEminate').css('transform','scale(0.3').css('transform-origin','0% 0% 0px')
     $('#loader').fadeIn(500);
 
     $(function() {
