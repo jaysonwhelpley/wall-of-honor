@@ -208,3 +208,15 @@ video {
   padding-bottom: 15vh;
   margin-bottom: 15vh;
 }
+
+.premute {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.premute img {
+  width: 2vh;
+  height: 2vh;
+  filter: invert(1.0);
+}

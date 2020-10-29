@@ -6,6 +6,7 @@
   var muted = false
   var duration
   var progress
+  var slug
 
   audio_bed = new Howl({
     src: ['audio/beds/bed1.mp3']
@@ -40,7 +41,7 @@
     console.log(template);
     $('.container').not('#index').append(html)
 
-    $(".menu .floating-menu .menu_button, .menu .floating-menu .next_button, .menu .floating-menu .back_button, .detail_mir:last .next_button, .detail_mir:first .back_button, .detail_mis:last .next_button, .detail_mis:first .back_button, .menu .floating-menu .play_pause_button, .menu .floating-menu .restart_button").addClass("inactive")
+    $(".section-menu .menu_button, .section-menu .next_button, .section-menu .previous_button, .section-menu .play_pause_button, .detail_mir:last .next_button, .detail_mir:first .previous_button, .detail_mis:last .next_button, .detail_mis:first .previous_button, .menu .floating-menu .play_pause_button, .section-menu .restart_button").addClass("inactive")
 
     console.log('render_menu');
 
@@ -113,13 +114,14 @@
 
     if (slug != null) {
       $('.detail-content:visible').stop()
-      $('.detail-content:visible').animate({scrollTop: $(".container:visible").offset().top},speed*2, 'linear',
+      $('html,body').stop().animate({scrollTop: $(".container:visible").offset().top},speed,'swing')
+      $('.detail-content:visible').animate({scrollTop: $(".container:visible").offset().top},speed,'swing',
         setTimeout(function () {
           missionaryAudioAndScroll(slug)
-        },speed*2)
+        },speed)
       )
     } else {
-      $('.detail-content:visible').stop().animate({scrollTop: $(".container:visible").offset().top},speed*2, 'linear')
+      $('html,body').stop().animate({scrollTop: $(".container:visible").offset().top},speed,'swing')
     }
 
     console.log('scrollReset');
@@ -127,6 +129,7 @@
 
   function scrollPause() {
     $('html,body').stop()
+    $('.detail-content:visible').stop()
     progress = eval(slug+"_audio.seek()")*100
     remaining = duration - progress
   }
@@ -138,11 +141,6 @@
 
   $(document).ready(function() {
 
-    // Trasnform Loader
-    // svg_width = $('#loader #mount-jaysonwhelpley-GradientStrokeEminate').width()
-    // screen_width = screen.availWidth
-    // transform_scale = screen_width/svg_width
-    // $('#loader #mount-jaysonwhelpley-GradientStrokeEminate').css('transform','scale(0.3').css('transform-origin','0% 0% 0px')
     $('#loader').fadeIn(500);
 
     $(function() {
@@ -163,7 +161,7 @@
         $('body').append(html);
 
         $('.mis_link').each(function() {
-          let slug = $(this).attr('id').split('_link').join('')
+          slug = $(this).attr('id').split('_link').join('')
 
           eval(slug+"_audio= new Howl({src:['audio/stories/"+slug+".mp3'],onend: function(){setTimeout(audio_bed.fade(1.0,0.0,6000),3000);}})")
 
@@ -189,7 +187,7 @@
         $('body').append(html);
 
         $('.mir_link').each(function() {
-          let slug = $(this).attr('id').split('_link').join('')
+          slug = $(this).attr('id').split('_link').join('')
 
           eval(slug+"_audio= new Howl({src:['audio/stories/"+slug+".mp3'],onend: function(){setTimeout(audio_bed.fade(1.0,0.0,6000),3000);}})")
         });
@@ -203,6 +201,7 @@
       populate_ids_for_previous_and_next_nav()
       render_menu()
       kill_orphans()
+      slug = null
       $('#loader').fadeOut(speed*2, function() {
         $('#overlay').fadeOut(speed*2, function() {
           $("#index").fadeIn(speed*3, function() {
@@ -219,7 +218,7 @@
       reload_tap_count()
     });
 
-    $('body').on('click', '.mute_button', function(event) {
+    $('body').on('click', '.mute_status', function(event) {
       if (muted==false) {
         muted = true
         Howler.mute(true)
@@ -227,7 +226,7 @@
       } else {
         muted = false
         get_container_slug()
-        if ( slug != "missionaries" && slug != "miracles" && slug != "home"  ) {
+        if ( slug != "missionaries" && slug != "miracles" && slug != "index"  ) {
           Howler.mute(false)
           eval(slug+"_audio.volume(1)")
           audio_bed.volume(1)
@@ -270,14 +269,14 @@
         $('html,body').stop()
       }
 
-      $('html,body').animate({scrollTop: $(".container:visible").offset().top},speed*2, 'linear',
+      $('.detail-content:visible').stop().animate({scrollTop: $(".container:visible").offset().top},speed, 'linear',
         setTimeout(function () {
           eval(slug+"_audio.volume(1).seek(0).play()")
           audio_bed.volume(1).seek(0).play()
           duration = eval(slug+"_audio.duration()")*1000
           play_css()
           scrollStart(duration)
-        },speed*2)
+        },speed)
       )
     });
 
@@ -292,6 +291,7 @@
 
     function missionaries_in() {
       $("#missionaries").fadeIn(speed)
+      slug = null
       scrollReset()
       localStorage.section = 'missionaries'
     }
@@ -300,6 +300,7 @@
 
     function miracles_in() {
       $("#miracles").fadeIn(speed)
+      slug = null
       scrollReset()
       localStorage.section = 'miracles'
     }
@@ -358,6 +359,7 @@
         $(this).next().fadeIn(speed, function() {
           get_container_slug()
           console.log('before');
+          Howler.stop() // Preventing errors from people hitting button multiple times.
           scrollReset(slug);
         });
       });
@@ -370,6 +372,7 @@
         $(this).prev().fadeIn(speed, function() {
           get_container_slug()
           console.log('before');
+          Howler.stop() // Preventing errors from people hitting button multiple times.
           scrollReset(slug);
         });
       });
@@ -379,10 +382,12 @@
 
     $('body').on('click', '.detail .menu_button', function(event) {
       let destination = localStorage.section
+      slug = null
       Howler.stop()
       $(this).parents('.container').fadeOut(speed*1,function(){
         $(`#${destination}`).fadeIn(speed, function() {
         });
+        scrollReset()
       });
     })
 
@@ -390,6 +395,7 @@
 
     $('body').on('click', '.home_button', function(event) {
       Howler.stop()
+      slug = null
       $(this).parents('.container').fadeOut(speed*1,function(){
         $(`#index`).fadeIn(speed, function() {
         });
