@@ -48,6 +48,14 @@
 <body class="unmuted paused">
 
   <div id="reload"></div>
+  <div class="size-guide x"></div>
+  <div class="size-guide x-extra"></div>
+  <div class="size-guide y"></div>
+  <div class="size-guide y-extra"></div>
+  <div class="size-guide ada-top"></div>
+  <div class="size-guide ada-bottom"></div>
+  <div class="size-guide avg-top"></div>
+  <div class="size-guide avg-bottom"></div>
 
   <!-- Loading Animation -->
 
@@ -75,11 +83,11 @@
 
     <div id="index" class="container hidden">
       <div class="row">
-        <div class="center-view main">
-          <h4 id="title"><img src="images/logo-jfp.png" alt="Jesus Film Project"></h4>
+        <div class="center-view index">
+          <img src="images/logo-jfp.png" class="logo" alt="Jesus Film Project">
           <p><button class="main" id='missionaries_button'>Missionaries</button></p>
           <p><button class="main" id='miracles_button'>Miracles</button></a></p>
-          <p>Touch one of the buttons to get started.</p>
+          <p class="touch-one">Touch one of the buttons to get started.</p>
         </div>
       </div>
     </div>
@@ -90,10 +98,10 @@
 <!-- Miracles Menu -->
 
 <script id="miracles-menu-template" type="text/template">
-  <div id="miracles" class="container menu miracles_section">
+  <div id="miracles" class="container section-menu miracles_section">
     <div class="row">
       <div class="center-view">
-        <h4 id="title">miracles</h4>
+        <h4 id="title">Miracles</h4>
         <ul id="miracle_list">
         {{#miracles}}
           <li>
@@ -113,10 +121,10 @@
 <!-- Missionaries Menu -->
 
 <script id="missionary-menu-template" type="text/template">
-  <div id="missionaries" class="container hide menu missionaries_section">
+  <div id="missionaries" class="container hide section-menu missionaries_section">
     <div class="row">
       <div class="center-view">
-        <h4 id="title">missionaries</h4>
+        <h4 id="title">Missionaries</h4>
         <ul id="missionary_list">
           {{#missionaries}}
             <li>

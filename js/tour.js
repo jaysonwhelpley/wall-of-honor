@@ -23,6 +23,11 @@
     if (reload_taps >= 8) {
       location.reload(true)
     }
+
+    if (reload_taps >= 1) {
+      $('.size-guide').hide()
+    }
+
   }
 
 
@@ -101,19 +106,20 @@
 
   function scrollStart(anim_duration) {
     // $('.detail-content:visible').animate({scrollTop: $('.scroller:visible').position().top}, 4000, 'linear')
-    $('.detail-content:visible').animate({scrollTop: ($('.scroller:visible').height() - $('.detail-content:visible').height() + 83)}, anim_duration, 'linear');
+    $('.detail-content:visible').stop().animate({scrollTop: ($('.scroller:visible').height() - $('.detail-content:visible').height() + 83)}, anim_duration, 'linear');
   }
 
   function scrollReset(slug) {
 
     if (slug != null) {
-      $('html,body').animate({scrollTop: $(".container:visible").offset().top},speed*2, 'linear',
+      $('.detail-content:visible').stop()
+      $('.detail-content:visible').animate({scrollTop: $(".container:visible").offset().top},speed*2, 'linear',
         setTimeout(function () {
           missionaryAudioAndScroll(slug)
         },speed*2)
       )
     } else {
-      $('html,body').animate({scrollTop: $(".container:visible").offset().top},speed*2, 'linear')
+      $('.detail-content:visible').stop().animate({scrollTop: $(".container:visible").offset().top},speed*2, 'linear')
     }
 
     console.log('scrollReset');

@@ -290,9 +290,9 @@ div.center-view {
 }
 
 div.center-view h4 {
-  /* font-size: 4rem; */
-  margin-bottom : 20%;
-  font-size     : 8vw;
+  margin-bottom : 4.5vh;
+  font-size     : 4.5vh;
+  text-align: center;
 }
 
 ul a {
@@ -364,13 +364,13 @@ div.avatar {
 }
 
 button.main {
-  display          : inline-block;
-  width            : 40vw;
-  height           : 8vw;
-  border           : none;
-  border-radius    : 5vw;
-  background-color : #fff;
-  font-size        : 4vw;
+  display: inline-block;
+      width: 50vw;
+      height: 7vh;
+      border: none;
+      border-radius: 7.5vh;
+      background-color: #fff;
+      font-size: 3vh;
 }
 
 div.main {
@@ -379,8 +379,24 @@ div.main {
   text-align  : center;
 }
 
+.index {
+  padding-top: 25vh;
+  text-align: center;
+}
+
+.index img {
+  margin: 0 auto 7.5vh;
+  height: 7.5vh;
+  text-align: center;
+}
+
+.touch-one {
+    font-size: 1.5vh;
+    margin-top: 5vh;
+}
+
 div.main img {
-  width : 15vw;
+  height : 15vw;
 }
 
 body.detail .meta {
@@ -502,7 +518,7 @@ input[type="submit"] {
   background-color : transparent;
   text-align       : center;
   text-decoration  : none;
-  text-transform   : uppercase;
+  text-transform   : none;
   /* font-size        : 11px; */
   font-weight      : 600;
   /* line-height      : 38px; */

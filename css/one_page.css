@@ -50,6 +50,75 @@ video {
   z-index: 999;
 }
 
+.size-guide {
+  position: fixed;
+}
+
+.x, .y, .x-extra, .y-extra {
+  top: 0;
+  left: 0;
+}
+
+.size-guide.x {
+  width: 52.6315789474vh;
+  height: 10px;
+  z-index: 50;
+  background: #0f0;
+}
+
+.size-guide.x-extra {
+  width: 57.6315789474vh;
+  height: 10px;
+  z-index: 49;
+  background: #f00;
+}
+
+.size-guide.y {
+  height: 190vw;
+  width: 10px;
+  z-index: 51;
+  background: #0f0;
+}
+
+.size-guide.y-extra {
+  height: 195vw;
+  width: 10px;
+  z-index: 48;
+  background: #f00;
+}
+
+.ada-top,.ada-bottom {
+  height: 0.1vh;
+  width: 100vw;
+  background-color: #00f;
+}
+
+.ada-top {
+  left: 0;
+  top: 40vh
+}
+
+.ada-bottom {
+  left: 0;
+  top: 74vh;
+}
+
+.avg-top,.avg-bottom {
+  height: 0.1vh;
+  width: 100vw;
+  background-color: #0ff;
+}
+
+.avg-top {
+  left: 0;
+  top: 25vh
+}
+
+.avg-bottom {
+  left: 0;
+  top: 58vh;
+}
+
 
 .floating-menu {
   background: transparent;
@@ -57,7 +126,7 @@ video {
   width: 10vw;
   z-index: 100;
   position: fixed;
-  top: 40%;
+  top: 42vh;
 }
 
 .floating-menu.right {
@@ -131,4 +200,11 @@ video {
 
 .hidden {
   display: none;
+}
+
+.section-menu {
+  padding-top: 15vh;
+  margin-top: 15vh;
+  padding-bottom: 15vh;
+  margin-bottom: 15vh;
 }
