@@ -4,6 +4,8 @@
   var mis_json = {}
   localStorage.section = 'home'
   var muted = false
+  var duration
+  var progress
 
   audio_bed = new Howl({
     src: ['audio/beds/bed1.mp3']
@@ -49,19 +51,30 @@
 
 
   function missionaryAudioAndScroll(slug) {
-      let duration = eval(slug+"_audio.duration()")*1000
+    if (muted == false) {
+      duration = eval(slug+"_audio.duration()")*1000
       console.log(duration)
 
       audio_bed.seek(0).volume(1).play()
       eval(slug+"_audio.seek(0).volume(1).play()")
 
       play_css()
+      scrollStart(duration)
 
       console.log('missionaryAudioAndScroll');
+    }
   }
 
   function kill_orphans() {
     $('p').each(function() {
+      var w = this.textContent.split(" ");
+      if (w.length > 1) {
+        w[w.length - 2] += "&nbsp;" + w[w.length - 1];
+        w.pop();
+        this.innerHTML = (w.join(" "));
+      }
+    });
+    $('h1').each(function() {
       var w = this.textContent.split(" ");
       if (w.length > 1) {
         w[w.length - 2] += "&nbsp;" + w[w.length - 1];
@@ -84,6 +97,36 @@
     $('.detail_mir').each(function(){
       mir_container_ids.push($(this).attr('id'))
     })
+  }
+
+  function scrollStart(anim_duration) {
+    // $('.detail-content:visible').animate({scrollTop: $('.scroller:visible').position().top}, 4000, 'linear')
+    $('.detail-content:visible').animate({scrollTop: ($('.scroller:visible').height() - $('.detail-content:visible').height() + 83)}, anim_duration, 'linear');
+  }
+
+  function scrollReset(slug) {
+
+    if (slug != null) {
+      $('html,body').animate({scrollTop: $(".container:visible").offset().top},speed*2, 'linear',
+        setTimeout(function () {
+          missionaryAudioAndScroll(slug)
+        },speed*2)
+      )
+    } else {
+      $('html,body').animate({scrollTop: $(".container:visible").offset().top},speed*2, 'linear')
+    }
+
+    console.log('scrollReset');
+  }
+
+  function scrollPause() {
+    $('html,body').stop()
+    progress = eval(slug+"_audio.seek()")*100
+    remaining = duration - progress
+  }
+
+  function scrollUnpause() {
+    scrollStart(remaining)
   }
 
 
@@ -194,6 +237,7 @@
       if (eval(slug+"_audio.playing()")) {
         eval(slug+"_audio.pause()")
         audio_bed.pause()
+        scrollPause()
         pause_css()
         console.log("PAUSING IT.");
       } else {
@@ -201,11 +245,13 @@
           eval(slug+"_audio.volume(1).play()")
           audio_bed.volume(1).play()
           console.log("PLAYING FROM MIDDLE");
+          scrollUnpause()
           play_css()
         } else {
           eval(slug+"_audio.volume(1).seek(0).play()")
           audio_bed.volume(1).seek(0).play()
           console.log("PLAYING FROM START");
+          scrollReset(slug)
           play_css()
         }
       }
@@ -215,13 +261,22 @@
       get_container_slug()
       if(eval(slug+"_audio.playing()")) {
         Howler.stop()
+        $('html,body').stop()
       }
-        eval(slug+"_audio.volume(1).seek(0).play()")
-        audio_bed.volume(1).seek(0).play()
+
+      $('html,body').animate({scrollTop: $(".container:visible").offset().top},speed*2, 'linear',
+        setTimeout(function () {
+          eval(slug+"_audio.volume(1).seek(0).play()")
+          audio_bed.volume(1).seek(0).play()
+          duration = eval(slug+"_audio.duration()")*1000
+          play_css()
+          scrollStart(duration)
+        },speed*2)
+      )
     });
 
     $('.home_button').click(function(event) {
-      $('.container').fadeOut('slow/400/fast', function() {
+      $('.container').fadeOut(speed*2, function() {
         goto_home()
         pause_css()
       });
@@ -231,7 +286,7 @@
 
     function missionaries_in() {
       $("#missionaries").fadeIn(speed)
-      $('html,body').animate({scrollTop: $("#missionaries").offset().top},speed*2)
+      scrollReset()
       localStorage.section = 'missionaries'
     }
 
@@ -239,7 +294,7 @@
 
     function miracles_in() {
       $("#miracles").fadeIn(speed)
-      $('html,body').animate({scrollTop: $("#miracles").offset().top},speed*2);
+      scrollReset()
       localStorage.section = 'miracles'
     }
 
@@ -273,11 +328,8 @@
       console.log($(`#${slug}`).attr("id"))
       $(missionaries).fadeOut(speed, function() {
         $("#"+slug).fadeIn(speed)
-        $('html,body').animate({scrollTop: $('#'+slug).offset().top},speed*2,function() {
-        });
-        if (muted==false) {
-          missionaryAudioAndScroll(slug)
-        }
+        console.log('before');
+        scrollReset(slug);
       });
     });
 
@@ -287,11 +339,8 @@
       console.log($(`#${slug}`).attr("id"))
       $(miracles).fadeOut(speed, function() {
         $("#"+slug).fadeIn(speed)
-        $('html,body').animate({scrollTop: $('#'+slug).offset().top},speed*2,function() {
-        if (muted==false) {
-          missionaryAudioAndScroll(slug)
-        }
-        });
+        console.log('before');
+        scrollReset(slug);
       });
     });
 
@@ -302,9 +351,8 @@
         pause_css()
         $(this).next().fadeIn(speed, function() {
           get_container_slug()
-          if (muted==false) {
-            missionaryAudioAndScroll(slug)
-          }
+          console.log('before');
+          scrollReset(slug);
         });
       });
     })
@@ -315,9 +363,8 @@
         pause_css()
         $(this).prev().fadeIn(speed, function() {
           get_container_slug()
-          if (muted==false) {
-            missionaryAudioAndScroll(slug)
-          }
+          console.log('before');
+          scrollReset(slug);
         });
       });
     })

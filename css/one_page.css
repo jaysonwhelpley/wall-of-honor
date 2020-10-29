@@ -50,12 +50,6 @@ video {
   z-index: 999;
 }
 
-.menu,
-.detail {
-  padding-top: 5vh;
-  margin-top: 10vh;
-  margin-bottom: 20%;
-}
 
 .floating-menu {
   background: transparent;

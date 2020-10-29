@@ -26,7 +26,7 @@
   width      : 50vw;
   /* max-width  : 50vw; */
   margin     : 0 auto;
-  /* padding    : 0 20px; */
+  min-height: 100vh;
 }
 
 .column,
@@ -198,7 +198,7 @@ html {
 
 body {
   color            : #fff;
-  background-color : #222;
+  /* background-color : #222; */
   font-family      : "Apercu",
                      "Lato",
                      "Droid Sans",
@@ -329,6 +329,10 @@ dl dt img.mis_image {
   border-radius : 50%;
 }
 
+dl dt img.mir_image {
+  border: .25vw solid rgba(0,0,0,0);
+}
+
 dl dd.meta {
   text-transform : uppercase;
   font-size      : 0.6462035541195477vh;
@@ -341,13 +345,21 @@ dl dd.name {
 }
 
 div.avatar {
-  margin-bottom : 3vw;
+  padding-bottom : 2vh;
   text-align    : center;
+  position      : sticky;
+  top: 0;
+}
+
+.detail div.avatar img {
+  width         : 15vh;
+  border-width  : .5vh;
+  border-style  : solid;
+  border-color  : transparent;
 }
 
 .detail_mis div.avatar img {
-  width         : 33vw;
-  border        : 6px solid #fff;
+  border-color  : #fff;
   border-radius : 50%;
 }
 
@@ -393,6 +405,10 @@ body.detail .center-view {
   z-index : 1;
   left    : 38%;
   margin  : 0 auto;
+  background: transparent;
+  padding-top: 5vh;
+  position: sticky;
+  top: 0vh;
 }
 
 .detail-header img {
@@ -404,7 +420,11 @@ body.detail .center-view {
 }
 
 .detail-content.main-content {
-  min-height : 50vh;
+    min-height: 50vh;
+    position: sticky;
+    /* top: 60vh; */
+    overflow-y: scroll;
+    height: 62.55vh;
 }
 
 .detail-content p {
@@ -413,19 +433,20 @@ body.detail .center-view {
                 serif;
   font-size   : 1.155vh;
   line-height : 1.7em;
+  padding: 0 1px
 }
 
-.detail-content.header-content {
+.header-content {
   text-align : center;
 }
 
 .header-content .name {
   margin-bottom : 0;
-  font-size     : 5vh;
+  font-size     : 2vh;
 }
 
 .header-content .meta {
-  margin-bottom  : 1vh;
+  margin-bottom  : 0;
   padding-bottom : 1vh;
   border-bottom  : 1px solid;
   font-family    : "Apercu",
@@ -436,6 +457,7 @@ body.detail .center-view {
   font-weight    : 100;
   font-variant   : all-small-caps;
   letter-spacing : .15rem;
+  margin-top: 0;
 }
 
 sup {
@@ -449,6 +471,20 @@ sup {
 }
 
 .ico-volume-on {}
+
+.bottom-logo {
+  position: sticky;
+  bottom: 0px;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  margin: 0 auto;
+  text-align: center;
+  border-top: 1px #fff solid;
+}
+
+.bottom-logo img {
+  width: 3vh
+}
 
 /* Buttons –––––––––––––––––––––––––––––––––––––––––––––––––– */
 

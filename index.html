@@ -143,18 +143,25 @@
   <div id="{{slug}}" class="container detail detail_mis missionaries_section">
     <div class="row">
       <div class="center-view">
+        <div class="detail-header">
         <div class="avatar">
-          <div class="detail-header"><img src="images/missionaries/{{slug}}.jpg" alt="avatar"></div>
-        </div>
-        <div class="detail-content header-content">
+          <img src="images/missionaries/{{slug}}.jpg" alt="avatar"></div>
+        <div class="header-content">
           <h1 class="name">{{name}}</h1>
           <p class="meta">{{location}} - {{date}}</p>
         </div>
+      </div>
+
         <div class="detail-content main-content">
+          <div class="scroller">
           {{#paragraphs}}
             <p>{{.}}</p>
           {{/paragraphs}}
+          </div>
         </div>
+      </div>
+      <div class="bottom-logo">
+        <img src="images/logo-jfp.png" alt="Jesus Film Project">
       </div>
     </div>
     <audio id="story" >
@@ -172,19 +179,29 @@
   <div id="{{slug}}" class="container detail detail_mir miracles_section">
     <div class="row">
       <div class="center-view">
-        <div class="avatar">
-          <div class="detail-header"><img src="images/miracles/{{slug}}.png" alt="avatar" >
+        <div class="detail-header">
+          <div class="avatar">
+            <img src="images/miracles/{{slug}}.png" alt="avatar" >
+            </div>
+          <div class="header-content">
+            <h1 class="name">{{title}}</h1>
+            <p class="meta">{{location}}</p>
           </div>
+
         </div>
-        <div class="detail-content">
-          <h1 class="name">{{title}}</h1>
-          <p class="meta">{{location}}</p>
+        <div class="detail-content main-content">
+          <div class="scroller">
           {{#paragraphs}}
             <p>{{.}}</p>
           {{/paragraphs}}
+          </div>
+        </div>
+        <div class="bottom-logo">
+          <img src="images/logo-jfp.png" alt="Jesus Film Project">
         </div>
       </div>
     </div>
+
     <audio id="story" >
       <source src="audio/stories/{{slug}}.mp3" type="audio/mpeg">
     </audio>
@@ -220,11 +237,11 @@
    <a class="mute_button">
        <span class="mute_status mute_off">
          <img src="images/icons/mute-off.png" alt="button">
-         <span class="label">Mute: Off</span>
+         <span class="label">Audio: On</span>
        </span>
        <span class="mute_status mute_on">
          <img src="images/icons/mute-on.png" alt="button">
-         <span class="label">Mute: On</span>
+         <span class="label">Audio: Off</span>
        </span>
     </a>
    <a class="play_pause_button">
