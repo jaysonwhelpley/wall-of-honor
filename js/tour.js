@@ -2,7 +2,7 @@
 
   const speed = 500
   var mis_json = {}
-  localStorage.section = 'home'
+  localStorage.section = 'index'
   var muted = false
   var duration
   var progress
@@ -100,13 +100,12 @@
   }
 
   function scrollStart(anim_duration) {
-    // $('.detail-content:visible').animate({scrollTop: $('.scroller:visible').position().top}, 4000, 'linear')
     $('.detail-content:visible').stop().animate({scrollTop: ($('.scroller:visible').height() - $('.detail-content:visible').height() + 83)}, anim_duration, 'linear');
   }
 
   function scrollReset(slug) {
 
-    if (slug != null) {
+    if (slug != "missionaries" && slug != "miracles" && slug != "index") {
       $('.detail-content:visible').stop()
       $('html,body').stop().animate({scrollTop: $(".container:visible").offset().top},speed,'swing')
       $('.detail-content:visible').animate({scrollTop: $(".container:visible").offset().top},speed,'swing',
@@ -123,16 +122,44 @@
   function scrollPause() {
     $('html,body').stop()
     $('.detail-content:visible').stop()
+    scroll_progress = $('.detail-content:visible').scrollTop()
+    $('.scroller:visible').stop()
     progress = eval(slug+"_audio.seek()")*100
     remaining = duration - progress
   }
 
   function scrollUnpause() {
-    scrollStart(remaining)
+    $('.detail-content:visible').stop().animate({scrollTop: scroll_progress}, speed, 'swing')
+    setTimeout(function() {
+      scrollStart(remaining)
+    },speed)
+
   }
 
   function setScrollerHeight() {
     $('.detail-content:visible').height( $(window).height() - $('.detail-header:visible').outerHeight() - $('.bottom-logo:visible').outerHeight() )
+  }
+
+  // Fade in Missionaries
+
+  function missionaries_in() {
+    $("#missionaries").fadeIn(speed)
+    scrollReset(slug)
+    localStorage.section = 'missionaries'
+  }
+
+  // Fade in Miracles
+
+  function miracles_in() {
+    $("#miracles").fadeIn(speed)
+    scrollReset(slug)
+    localStorage.section = 'miracles'
+  }
+
+  // Fade out Index
+
+  function index_out() {
+    $('#index').fadeOut(speed);
   }
 
 
@@ -194,7 +221,7 @@
       populate_ids_for_previous_and_next_nav()
       render_menu()
       kill_orphans()
-      slug = null
+      slug = "index"
       $('#loader').fadeOut(speed*2, function() {
         $('#overlay').fadeOut(speed*2, function() {
           $("#index").fadeIn(speed*3, function() {
@@ -268,33 +295,10 @@
       )
     });
 
-    // Fade in Missionaries
-
-    function missionaries_in() {
-      $("#missionaries").fadeIn(speed)
-      slug = null
-      scrollReset()
-      localStorage.section = 'missionaries'
-    }
-
-    // Fade in Miracles
-
-    function miracles_in() {
-      $("#miracles").fadeIn(speed)
-      slug = null
-      scrollReset()
-      localStorage.section = 'miracles'
-    }
-
-    // Fade out Index
-
-    function index_out() {
-      $('#index').fadeOut(speed);
-    }
-
     // Click Missionaries Button
 
     $("#missionaries_button").click(function(event) {
+      slug = "missionaries"
       $('#index').fadeOut(speed, function() {
         missionaries_in()
       });
@@ -303,6 +307,7 @@
     // Click miracles button
 
     $('#miracles_button').click(function(event) {
+      slug = "miracles"
       $('#index').fadeOut(speed, function() {
         miracles_in()
       });
@@ -332,6 +337,7 @@
 
 
     $('body').on('click','.detail .next_button:not(".inactive")', function() {
+      $('.detail-content:visible').scrollTop(0)
       $(this).parents('.container').fadeOut(speed, function() {
         Howler.stop()
         pause_css()
@@ -345,6 +351,7 @@
     })
 
     $('body').on('click','.detail .previous_button:not(".inactive")', function() {
+      $('.detail-content:visible').scrollTop(0)
       $(this).parents('.container').fadeOut(speed, function() {
         Howler.stop()
         pause_css()
@@ -361,7 +368,7 @@
 
     $('body').on('click', '.detail .menu_button', function(event) {
       let destination = localStorage.section
-      slug = null
+      slug = localStorage.section
       Howler.stop()
       $(this).parents('.container').fadeOut(speed,function(){
         $(`#${destination}`).fadeIn(speed, function() {
@@ -374,12 +381,12 @@
 
     $('body').on('click', '.home_button', function(event) {
       Howler.stop()
-      slug = null
+      slug = index
       $(this).parents('.container').fadeOut(speed*1,function(){
         $(`#index`).fadeIn(speed, function() {
         });
       });
-      localStorage.section = "home"
+      localStorage.section = "index"
     })
 
 
