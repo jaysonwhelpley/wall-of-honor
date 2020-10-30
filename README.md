@@ -1,7 +1,7 @@
 # wall-of-honor
 Audio story wall for the Jesus Film Project tour.
 
-Created in October 2020 by Jayson Whelpley and Drew Warkentin
+Created in October/November 2020 by Jayson Whelpley and Drew Warkentin
 
 ## Directory Structure
 ```index.html      The only html file.
@@ -9,6 +9,7 @@ Created in October 2020 by Jayson Whelpley and Drew Warkentin
     /bed            The musical audio bed lives here.
     /stories        All of the stories' audio tracks.
   /css
+    /css.css        All basic CSS (incomplete)
   /images
     /icons          For the side menu
     /miracles       Miracles icons
@@ -69,6 +70,8 @@ When the page is reloaded the new story should be available.
 The `body` tag has two classes that store the audio tracks' playing/muted status.
 
 `.reload` creates a small square at the bottom left of the screen that, when tapped 8 times, reloads the experience.
+
+`.reload` single click removes guide lines.
 
 `.overlay` goes under the loading animation, videos aren't easily "faded in", but divs are easily faded out.
 
