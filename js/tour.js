@@ -7,6 +7,7 @@
   var duration
   var progress
   var slug
+  var scroll_progress
 
   audio_bed = new Howl({
     src: ['audio/beds/bed1.mp3']
@@ -19,7 +20,6 @@
 
   function reload_tap_count() {
     reload_taps++
-    console.log(reload_taps);
 
     if (reload_taps >= 8) {
       location.reload(true)
@@ -38,28 +38,25 @@
 
     let template = $('#menuTemplate').html()
     let html = Mustache.render(template,data)
-    console.log(template);
     $('.container').not('#index').append(html)
 
     $(".section-menu .menu_button, .section-menu .next_button, .section-menu .previous_button, .section-menu .play_pause_button, .detail_mir:last .next_button, .detail_mir:first .previous_button, .detail_mis:last .next_button, .detail_mis:first .previous_button, .menu .floating-menu .play_pause_button, .section-menu .restart_button").addClass("inactive")
 
-    console.log('render_menu');
 
     }
 
   function  play_css() {
-    $('body').addClass('playing').removeClass('paused')
+    $('body').removeClass('paused').addClass('playing')
   }
 
   function pause_css() {
-    $('body').addClass('paused').removeClass('playing')
+    $('body').removeClass('playing').addClass('paused')
   }
 
 
   function missionaryAudioAndScroll(slug) {
     if (muted == false) {
       duration = eval(slug+"_audio.duration()")*1000
-      console.log(duration)
 
       audio_bed.seek(0).volume(1).play()
       eval(slug+"_audio.seek(0).volume(1).play()")
@@ -67,7 +64,6 @@
       play_css()
       scrollStart(duration)
 
-      console.log('missionaryAudioAndScroll');
     }
   }
 
@@ -88,11 +84,9 @@
         this.innerHTML = (w.join(" "));
       }
     });
-    console.log('all the orphans have been killed');
   }
 
   function get_container_slug() {
-    console.log($('.container:visible').attr('id'));
     slug = $('.container:visible').attr('id')
   }
 
@@ -124,7 +118,6 @@
       $('html,body').stop().animate({scrollTop: $(".container:visible").offset().top},speed,'swing')
     }
 
-    console.log('scrollReset');
   }
 
   function scrollPause() {
@@ -138,6 +131,10 @@
     scrollStart(remaining)
   }
 
+  function setScrollerHeight() {
+    $('.detail-content:visible').height( $(window).height() - $('.detail-header:visible').outerHeight() - $('.bottom-logo:visible').outerHeight() )
+  }
+
 
   $(document).ready(function() {
 
@@ -149,7 +146,6 @@
 
       $.getJSON(misJSON, function(data){
 
-        console.log(data)
         mis_json = data
 
         let template = $('#missionary-menu-template').html()
@@ -167,7 +163,6 @@
 
         });
 
-        console.log('missionaries');
 
       });
 
@@ -175,7 +170,6 @@
 
       $.getJSON(mirJSON, function(data){
 
-        console.log(data)
         mir_json = data
 
         let template = $('#miracles-menu-template').html()
@@ -196,7 +190,6 @@
         //   src: mir_stories
         // });
 
-        console.log('miracles');
 
       populate_ids_for_previous_and_next_nav()
       render_menu()
@@ -233,29 +226,24 @@
         }
         $('body').removeClass('muted').addClass('unmuted')
       }
-      console.log(muted)
     });
 
     $('body.unmuted').on('click', '.detail .play_pause_button', function(event) {
-      console.log("Playing/Pausing")
       get_container_slug()
       if (eval(slug+"_audio.playing()")) {
         eval(slug+"_audio.pause()")
         audio_bed.pause()
         scrollPause()
         pause_css()
-        console.log("PAUSING IT.");
       } else {
         if (eval(slug+"_audio.seek()") > 2) {
           eval(slug+"_audio.volume(1).play()")
           audio_bed.volume(1).play()
-          console.log("PLAYING FROM MIDDLE");
           scrollUnpause()
           play_css()
         } else {
           eval(slug+"_audio.volume(1).seek(0).play()")
           audio_bed.volume(1).seek(0).play()
-          console.log("PLAYING FROM START");
           scrollReset(slug)
           play_css()
         }
@@ -278,13 +266,6 @@
           scrollStart(duration)
         },speed)
       )
-    });
-
-    $('.home_button').click(function(event) {
-      $('.container').fadeOut(speed*2, function() {
-        goto_home()
-        pause_css()
-      });
     });
 
     // Fade in Missionaries
@@ -330,23 +311,21 @@
     // Specific Missionary Button
 
     $('body').on('click', '.mis_link', function(event) {
-      let slug = $(this).attr('id').split('_link').join('');
-      console.log(slug)
-      console.log($(`#${slug}`).attr("id"))
+      slug = $(this).attr('id').split('_link').join('');
       $(missionaries).fadeOut(speed, function() {
         $("#"+slug).fadeIn(speed)
-        console.log('before');
+        setScrollerHeight()
         scrollReset(slug);
       });
     });
 
+    // Specific Miracle Button
+
     $('body').on('click', '.mir_link', function(event) {
-      let slug = $(this).attr('id').split('_link').join('');
-      console.log(slug)
-      console.log($(`#${slug}`).attr("id"))
+      slug = $(this).attr('id').split('_link').join('');
       $(miracles).fadeOut(speed, function() {
         $("#"+slug).fadeIn(speed)
-        console.log('before');
+        setScrollerHeight()
         scrollReset(slug);
       });
     });
@@ -358,10 +337,10 @@
         pause_css()
         $(this).next().fadeIn(speed, function() {
           get_container_slug()
-          console.log('before');
           Howler.stop() // Preventing errors from people hitting button multiple times.
           scrollReset(slug);
         });
+        setScrollerHeight()
       });
     })
 
@@ -371,10 +350,10 @@
         pause_css()
         $(this).prev().fadeIn(speed, function() {
           get_container_slug()
-          console.log('before');
           Howler.stop() // Preventing errors from people hitting button multiple times.
           scrollReset(slug);
         });
+        setScrollerHeight()
       });
     })
 
@@ -384,7 +363,7 @@
       let destination = localStorage.section
       slug = null
       Howler.stop()
-      $(this).parents('.container').fadeOut(speed*1,function(){
+      $(this).parents('.container').fadeOut(speed,function(){
         $(`#${destination}`).fadeIn(speed, function() {
         });
         scrollReset()
