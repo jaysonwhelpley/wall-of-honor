@@ -40,6 +40,33 @@ video {
     filter: brightness(40%) sepia(80%) contrast(150%) blur(3px);
 }
 
+.bg-image {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -100;
+    filter: brightness(70%) sepia(0%) contrast(130%) blur(5px));
+    opacity: 1;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.bg-image > div {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
 #reload {
   position: fixed;
   top:95vh;

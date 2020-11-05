@@ -8,6 +8,8 @@
   var progress
   var slug
   var scroll_progress
+  var which_image
+  var being_replaced
 
   audio_bed = new Howl({
     src: ['audio/beds/bed1.mp3']
@@ -17,6 +19,60 @@
   mir_container_ids = []
 
   reload_taps = 0
+
+  var bgs = []
+
+  function loadBGs() {
+    let   fileExt = [".png", ".jpg", ".gif"]
+    $.ajax({
+      //This will retrieve the contents of the folder if the folder is configured as 'browsable'
+      url: 'images/bgs/',
+      success: function (data) {
+         $(data).find("a:contains(" + fileExt[0] + "),a:contains(" + fileExt[1] + "),a:contains(" + fileExt[2] + ")").each(function () {
+            var filename = this.href.replace(window.location.host, "").replace("http:///", 'images/bgs/');
+            // console.log("filename: " + filename);
+            elurl = `url('${filename}')`
+            // console.log("   elurl: " + elurl);
+            elcss = `<div class='bg-image'><div style="background-image: ${elurl}""></div></div>`
+            // console.log("   elcss: " + elcss);
+            $("#bgImage").before(elcss)
+            bgs.push(filename)
+         });
+       }
+    });
+
+  }
+
+  function newBG() {
+
+    let replacement_image = Math.floor((Math.random())*bgs.length)
+    being_replaced = which_image
+
+    while (replacement_image == which_image) {
+      replacement_image = Math.floor((Math.random())*bgs.length)
+      console.log(replacement_image)
+    }
+
+    which_image = replacement_image
+
+    the_bg = bgs[which_image]
+
+    console.log("replacement_image :" + replacement_image);
+    console.log("   being_replaced :" + being_replaced);
+    console.log("      which_image :" + which_image);
+
+    // MAYBE TRY CHANGING Z-INDEX ALSO.
+
+    $(".bg-image:eq(" + which_image + ")").fadeIn(speed*2, function() {
+      $(".bg-image:eq(" + being_replaced + ")").fadeOut(100)
+    })
+
+
+
+
+
+
+  }
 
   function reload_tap_count() {
     reload_taps++
@@ -165,6 +221,8 @@
 
   $(document).ready(function() {
 
+
+    loadBGs()
     $('#loader').fadeIn(500);
 
     $(function() {
@@ -221,9 +279,19 @@
       populate_ids_for_previous_and_next_nav()
       render_menu()
       kill_orphans()
+
+      $.fn.preload = function() {
+          this.each(function(){
+              let new_image = (new Image()).src = this;
+          });
+      }
+
+      $(bgs).preload();
+
+      newBG()
       slug = "index"
       $('#loader').fadeOut(speed*2, function() {
-        $('#overlay').fadeOut(speed*2, function() {
+        $('#overlay').animate({"opacity": 0.5}, 500, function() {
           $("#index").fadeIn(speed*3, function() {
             // $('body').css({'padding-top':'80vh', 'padding-bottom':'80vh'})
           });
@@ -300,6 +368,7 @@
     $("#missionaries_button").click(function(event) {
       slug = "missionaries"
       $('#index').fadeOut(speed, function() {
+        newBG()
         missionaries_in()
       });
     });
@@ -309,6 +378,7 @@
     $('#miracles_button').click(function(event) {
       slug = "miracles"
       $('#index').fadeOut(speed, function() {
+        newBG()
         miracles_in()
       });
     });
@@ -318,6 +388,7 @@
     $('body').on('click', '.mis_link', function(event) {
       slug = $(this).attr('id').split('_link').join('');
       $(missionaries).fadeOut(speed, function() {
+        newBG()
         $("#"+slug).fadeIn(speed)
         setScrollerHeight()
         scrollReset(slug);
@@ -329,6 +400,7 @@
     $('body').on('click', '.mir_link', function(event) {
       slug = $(this).attr('id').split('_link').join('');
       $(miracles).fadeOut(speed, function() {
+        newBG()
         $("#"+slug).fadeIn(speed)
         setScrollerHeight()
         scrollReset(slug);
@@ -341,6 +413,7 @@
       $(this).parents('.container').fadeOut(speed, function() {
         Howler.stop()
         pause_css()
+        newBG()
         $(this).next().fadeIn(speed, function() {
           get_container_slug()
           Howler.stop() // Preventing errors from people hitting button multiple times.
@@ -355,6 +428,7 @@
       $(this).parents('.container').fadeOut(speed, function() {
         Howler.stop()
         pause_css()
+        newBG()
         $(this).prev().fadeIn(speed, function() {
           get_container_slug()
           Howler.stop() // Preventing errors from people hitting button multiple times.
@@ -371,6 +445,7 @@
       slug = localStorage.section
       Howler.stop()
       $(this).parents('.container').fadeOut(speed,function(){
+        newBG()
         $(`#${destination}`).fadeIn(speed, function() {
         });
         scrollReset()
@@ -383,6 +458,7 @@
       Howler.stop()
       slug = index
       $(this).parents('.container').fadeOut(speed*1,function(){
+        newBG()
         $(`#index`).fadeIn(speed, function() {
         });
       });
